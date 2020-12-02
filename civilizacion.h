@@ -1,20 +1,25 @@
 #ifndef CIVILIZACION_H
 #define CIVILIZACION_H
 
+#include "aldeano.h"
+
 #include <iostream>
 #include <iomanip>
+#include <list>
+#include <algorithm>
 
-using namespace std;
 
 class Civilizacion{
 private:
-    string nombre;
+    std::string nombre;
     float ubx;
     float uby;
     float puntuacion;
+    list<Aldeano> aldeanos;
 
 public:
     Civilizacion();
+    Civilizacion(const std::string &nombre, float &ubx, float &uby, float &puntuacion);
 
     void setNombre(const std::string &v);
     void setX(float &v);
@@ -25,6 +30,24 @@ public:
     float getX();
     float getY();
     float getPuntuacion();
+
+    //Metodos de la lista
+    void agregarFinal(const Aldeano &a);
+    void agregarInicio(const Aldeano &a);
+
+    void print();
+
+    void eliminarNombre(const std::string &nombre);
+    void eliminarSalud(int &salud);
+    void eliminarEdad();
+
+    void ordenarNombre();
+    void ordenarEdad();
+    void ordenarSalud();
+
+    Aldeano *buscar(const Aldeano &a);
+
+    //fin metodos de la lista
 
     bool operator ==(const Civilizacion & c){
         return nombre == c.nombre;

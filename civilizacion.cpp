@@ -1,9 +1,12 @@
 #include "civilizacion.h"
 
 
-Civilizacion::Civilizacion() { } 
+Civilizacion::Civilizacion() { }
 
-void Civilizacion::setNombre(const string &v){
+Civilizacion::Civilizacion(const std::string &nombre, float &ubx, float &uby, float &puntuacion) : nombre(nombre), ubx(ubx), uby(uby), puntuacion(puntuacion) { }
+
+void Civilizacion::setNombre(const string &v)
+{
     nombre = v;
 }
 
@@ -34,4 +37,80 @@ float Civilizacion::getY(){
 
 float Civilizacion::getPuntuacion(){
     return puntuacion;
+}
+
+//métedos de la lista 
+void Civilizacion::agregarFinal(const Aldeano& a){
+    aldeanos.push_back(a);
+    puntuacion += 100;
+}
+
+void Civilizacion::agregarInicio(const Aldeano& a){
+    aldeanos.push_front(a);
+    puntuacion += 100;
+}
+
+void Civilizacion::print(){
+    cout << left;
+    cout << setw(15) <<"Nombre";
+    cout << setw(8) << "Edad";
+    cout << setw(15) << "Genero";
+    cout << setw(8) << "Salud" << endl;
+    
+    for (auto it = aldeanos.begin(); it != aldeanos.end(); it++){
+        cout << *it << endl;
+    }
+}
+
+void Civilizacion::eliminarNombre(const string &nombre){
+    for (auto it = aldeanos.begin(); it != aldeanos.end(); it++){
+        Aldeano &a = *it;
+
+        if (nombre == a.getNombre())
+        {
+            aldeanos.erase(it);
+            break;
+        }
+        
+    }
+}
+
+void Civilizacion::eliminarSalud(int &salud){
+    aldeanos.remove_if([salud](const Aldeano &a) { return a.getSalud() < salud; } );
+}
+
+bool comparaEdad(const Aldeano &a)
+{
+    return a.getEdad() >= 60 ;
+}
+void Civilizacion::eliminarEdad()
+{
+    aldeanos.remove_if(comparaEdad);
+}
+
+void Civilizacion::ordenarNombre(){
+    aldeanos.sort();
+}
+
+void Civilizacion::ordenarEdad()
+{
+    aldeanos.sort([](const Aldeano &a1, const Aldeano &a2) { return a1.getEdad() > a2.getEdad(); });
+}
+
+void Civilizacion::ordenarSalud()
+{
+    aldeanos.sort([](const Aldeano &a1, const Aldeano &a2) { return a1.getSalud() > a2.getSalud(); });
+}
+
+Aldeano * Civilizacion::buscar(const Aldeano &a){
+    auto it = find(aldeanos.begin(), aldeanos.end(), a);
+
+    if (it == aldeanos.end())
+    {
+        return nullptr;
+    }
+    else
+    {
+        return &(*it);
+    }
 }
