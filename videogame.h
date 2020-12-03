@@ -4,6 +4,7 @@
 #include "civilizacion.h"
 #include <vector>
 #include <algorithm>
+#include <fstream>
 
 class Videogame{
     private:
@@ -32,6 +33,9 @@ class Videogame{
         void ordenarPuntuacion();
 
         Civilizacion* buscar(const Civilizacion &c);
+
+        void respaldar();
+        void recuperar();
 
         friend Videogame &operator<<(Videogame &v, const Civilizacion &c)
         {

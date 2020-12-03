@@ -22,7 +22,9 @@ int main(){
         cout << "\t9. Buscar civilizacion" << endl;
         cout << "\t10. Modificar" << endl;
         cout << "\t11. Resumen" << endl;
-        cout << "\t12. Salir" << endl;
+        cout << "\t12. Respaldar" << endl;
+        cout << "\t13. Recuperar" << endl;
+        cout << "\t14. Salir" << endl;
         cout << "Ingrese el numero de opcion a realizar: ";
         getline(cin, opc);
         
@@ -235,6 +237,16 @@ int main(){
         }
         else if (opc == "12")
         {
+            game.respaldar();
+            cout << "La informacion que se tenia al momento se guardo" << endl;
+        }
+        else if (opc == "13")
+        {
+            game.recuperar();
+            cout << "La informacion que se tenia guardada se recupero" << endl;
+        }
+        else if (opc == "14")
+        {
             system("cls");
             cout << "Hasta luego" << endl;
             break;
@@ -279,11 +291,15 @@ void aldeanosEnCiv(Civilizacion *civ){
             {
                 civ->agregarInicio(ald);
                 cout << "Aldeano agregado al inicio" << endl;
+                float auxf(civ->getPuntuacion() + 100);
+                civ->setPuntuacion(auxf);
             }
             else if (opc == "2")
             {
                 civ->agregarFinal(ald);
                 cout << "Aldeano agregado al final" << endl;
+                float auxf(civ->getPuntuacion() + 100);
+                civ->setPuntuacion(auxf);
             }
             else
             {

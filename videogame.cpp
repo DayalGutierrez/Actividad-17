@@ -100,6 +100,65 @@ Civilizacion *Videogame::buscar(const Civilizacion &c){
     {
         return &(*it);
     }
-    
+}
+
+void Videogame::respaldar(){
+    ofstream archivo("civilizaciones.txt");
+    if (archivo.is_open())
+    {
+        for (size_t i = 0; i < civilizaciones.size(); i++)
+        {
+            Civilizacion &c = civilizaciones[i];
+            archivo << c.getNombre() << endl;
+            archivo << c.getX() << endl;
+            archivo << c.getY() << endl;
+            archivo << c.getPuntuacion() << endl;
+
+            c.respaldar_aldeanos();
+        }
+    }
+    archivo.close();
+}
+
+void Videogame::recuperar(){
+    ifstream archivo("civilizaciones.txt");
+    if (archivo.is_open())
+    {
+        string auxs;
+        float auxf;
+        Civilizacion civ;
+
+        while (true)
+        {
+            getline(archivo, auxs);
+            if (archivo.eof())
+            {
+                break;
+            }
+
+            civ.setNombre(auxs);
+
+            getline(archivo, auxs);
+            auxf = stof(auxs);
+            civ.setX(auxf);
+
+            getline(archivo, auxs);
+            auxf = stof(auxs);
+            civ.setY(auxf);
+
+            getline(archivo, auxs);
+            auxf = stof(auxs);
+            civ.setPuntuacion(auxf);
+
+            agregar(civ);
+        }
+        
+    }
+    archivo.close();
+    for (size_t i = 0; i < civilizaciones.size(); i++)
+    {
+        Civilizacion &c = civilizaciones[i];
+        c.recuperar_aldeanos();
+    }
     
 }

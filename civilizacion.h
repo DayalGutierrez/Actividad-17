@@ -7,6 +7,7 @@
 #include <iomanip>
 #include <list>
 #include <algorithm>
+#include <fstream>
 
 
 class Civilizacion{
@@ -48,6 +49,9 @@ public:
     Aldeano *buscar(const Aldeano &a);
 
     //fin metodos de la lista
+
+    void respaldar_aldeanos();
+    void recuperar_aldeanos();
 
     bool operator ==(const Civilizacion & c){
         return nombre == c.nombre;

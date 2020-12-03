@@ -42,12 +42,10 @@ float Civilizacion::getPuntuacion(){
 //métedos de la lista 
 void Civilizacion::agregarFinal(const Aldeano& a){
     aldeanos.push_back(a);
-    puntuacion += 100;
 }
 
 void Civilizacion::agregarInicio(const Aldeano& a){
     aldeanos.push_front(a);
-    puntuacion += 100;
 }
 
 void Civilizacion::print(){
@@ -113,4 +111,53 @@ Aldeano * Civilizacion::buscar(const Aldeano &a){
     {
         return &(*it);
     }
+}
+
+void Civilizacion::respaldar_aldeanos(){
+    ofstream archivo(getNombre() + ".txt", ios::out);
+    for (auto it = aldeanos.begin(); it != aldeanos.end(); ++it)
+    {
+        Aldeano &aldeano = *it;
+        archivo << aldeano.getNombre() << endl;
+        archivo << aldeano.getEdad() << endl;
+        archivo << aldeano.getGenero() << endl;
+        archivo << aldeano.getSalud() << endl;
+    }
+    archivo.close();
+}
+
+void Civilizacion::recuperar_aldeanos(){
+    ifstream archivo(getNombre() + ".txt", ios::out);
+    if (archivo.is_open())
+    {
+        string auxs;
+        int auxi;
+        Aldeano alde;
+
+        while (true)
+        {
+            getline(archivo, auxs);
+            if (archivo.eof())
+            {
+                break;
+            }
+
+            alde.setNombre(auxs);
+
+            getline(archivo, auxs);
+            auxi = stoi(auxs);
+            alde.setEdad(auxi);
+
+            getline(archivo, auxs);
+            alde.setGenero(auxs);
+
+            getline(archivo, auxs);
+            auxi = stoi(auxs);
+            alde.setSalud(auxi);
+
+            agregarFinal(alde);
+        }
+        
+    }
+    archivo.close();
 }
