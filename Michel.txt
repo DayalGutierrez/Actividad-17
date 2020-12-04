@@ -1,0 +1,8 @@
+Gabriela
+50
+Mujer
+50
+Juan
+20
+Hombre
+100

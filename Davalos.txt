@@ -1,0 +1,4 @@
+Oscar
+12
+Hombre
+200

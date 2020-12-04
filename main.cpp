@@ -214,7 +214,7 @@ int main(){
                     cout << "Ingrese la nueva puntuacion: ";
                     cin >> auxf;
                     cin.ignore();
-                    ptr->setY(auxf);
+                    ptr->setPuntuacion(auxf);
                     cout << "Puntuacion cambiada con exito" << endl;
                 }
                 else
